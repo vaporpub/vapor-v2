@@ -5,4 +5,5 @@
 // ];
 //  "/black-friday-sale-612x392.jpg",
 // "/c_02.jpg",
-export const images = ["/c_01.webp", "/c_03.jpg"];
+// "/c_03.jpg"
+export const images = ["/c_01.webp", "/c_02.jpg"];
