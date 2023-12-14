@@ -9,6 +9,7 @@ type CatalogContextT = {
   productsByType: (type: TypeProduct) => ProductRef[];
   newProducts: ProductRef[];
   topSellers: ProductRef[];
+  productTypes: string[];
 };
 const CatalogContext = createContext({} as CatalogContextT);
 export function useCatalog() {
@@ -25,8 +26,17 @@ export const CatalogContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const newProducts = useMemo(() => {
     return products.filter((el) => el.product.newProduct);
   }, [products]);
+  const productTypes = useMemo(() => {
+    const types: string[] = [];
+    products.forEach((item) => {
+      if (!types.includes(item.product.type)) types.push(item.product.type);
+    });
+    return types;
+  }, [products]);
   return (
-    <CatalogContext.Provider value={{ products, isEmpty, topSellers, newProducts, productsByType }}>
+    <CatalogContext.Provider
+      value={{ productTypes, products, isEmpty, topSellers, newProducts, productsByType }}
+    >
       {children}
     </CatalogContext.Provider>
   );
