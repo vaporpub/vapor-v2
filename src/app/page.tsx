@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/carousel";
 
 export default function Home() {
-  const { topSellers } = useCatalog();
+  const { topSellers, topSellersTypes } = useCatalog();
   return (
     <main>
       <div className="max-w-5xl w-full  mx-auto py-5 overflow-hidden relative flex items-center px-2 flex-col gap-5">
@@ -29,55 +29,62 @@ export default function Home() {
         </div>
 
         <div className="w-full">
-          {topSellers && topSellers.length > 0 ? (
-            <div>
-              <div className="flex flex-col w-full gap-5">
-                <div className="flex justify-between gap-2 items-center w-full">
-                  <div>Топ Продаж</div>
-                  <div>
-                    <Button variant={"link"} asChild>
-                      <Link href={"/catalog"}>Перейти к каталогу</Link>
-                    </Button>
-                  </div>
-                </div>
-                {/* <div className="grid xs:mx-0 mx-auto grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 xs:gap-4 w-full"> */}
-                {/* {topSellers.map((el) => (
+          {topSellers && topSellers.length > 0
+            ? topSellersTypes.map((item) => {
+                const arr = topSellers.filter((el) => el.product.type === item);
+                return (
+                  <div className="mb-10">
+                    <div className="flex flex-col w-full gap-5">
+                      <div className="flex justify-between gap-2 items-center w-full">
+                        <div>
+                          <span>Топ Продаж </span>
+                          <span className="capitalize">{item.split("-").join(" ")}</span>
+                        </div>
+                        <div>
+                          <Button variant={"link"} asChild>
+                            <Link href={"/catalog/" + item}>Перейти к каталогу</Link>
+                          </Button>
+                        </div>
+                      </div>
+                      {/* <div className="grid xs:mx-0 mx-auto grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 xs:gap-4 w-full"> */}
+                      {/* {topSellers.map((el) => (
                     <ProductItem key={el.id} {...el} />
                   ))} */}
-                <Carousel
-                  opts={{
-                    align: "start",
-                  }}
-                  className="w-full flex flex-col"
-                >
-                  {/* <div className="w-full border-b relative"></div> */}
-                  <CarouselPrevious className="left-3 z-10 w-12 h-12 " />
-                  <CarouselNext className="right-3 z-10 w-12 h-12 " />
+                      <Carousel
+                        opts={{
+                          align: "start",
+                        }}
+                        className="w-full flex flex-col"
+                      >
+                        {/* <div className="w-full border-b relative"></div> */}
+                        <CarouselPrevious className="left-3 z-10 w-12 h-12 " />
+                        <CarouselNext className="right-3 z-10 w-12 h-12 " />
 
-                  <CarouselContent className="w-full ml-0 gap-4">
-                    {topSellers
-                      .sort((a, b) => a.product.type.localeCompare(b.product.type))
-                      .map((el, index) => (
-                        <CarouselItem
-                          key={index}
-                          className="basis-1/2 sm:basis-1/3 lg:basis-1/4 self-stretch flex pl-0"
-                        >
-                          <ProductItem key={el.id} {...el} />
-                          {/* <div className="p-1">
+                        <CarouselContent className="w-full ml-0 gap-4">
+                          {arr
+                            // .sort((a, b) => a.product.type.localeCompare(b.product.type))
+                            .map((el, index) => (
+                              <CarouselItem
+                                key={index}
+                                className="basis-1/2 sm:basis-1/3 lg:basis-1/4 self-stretch flex pl-0"
+                              >
+                                <ProductItem key={el.id} {...el} />
+                                {/* <div className="p-1">
               <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-6">
                   <span className="text-3xl font-semibold">{index + 1}</span>
                 </CardContent>
               </Card>
             </div> */}
-                        </CarouselItem>
-                      ))}
-                  </CarouselContent>
-                </Carousel>
-              </div>
-            </div>
-          ) : // </div>
-          null}
+                              </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                      </Carousel>
+                    </div>
+                  </div>
+                );
+              })
+            : null}
         </div>
 
         <div className="w-full flex flex-col gap-6 py-10">
