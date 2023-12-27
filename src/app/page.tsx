@@ -6,6 +6,14 @@ import { useCatalog } from "@/context/CatalogContext";
 import Image from "next/image";
 import Link from "next/link";
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
 export default function Home() {
   const { topSellers } = useCatalog();
   return (
@@ -32,14 +40,44 @@ export default function Home() {
                     </Button>
                   </div>
                 </div>
-                <div className="grid xs:mx-0 mx-auto grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 xs:gap-4 w-full">
-                  {topSellers.map((el) => (
+                {/* <div className="grid xs:mx-0 mx-auto grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 xs:gap-4 w-full"> */}
+                {/* {topSellers.map((el) => (
                     <ProductItem key={el.id} {...el} />
-                  ))}
-                </div>
+                  ))} */}
+                <Carousel
+                  opts={{
+                    align: "start",
+                  }}
+                  className="w-full flex flex-col"
+                >
+                  {/* <div className="w-full border-b relative"></div> */}
+                  <CarouselPrevious className="left-3 z-10 w-12 h-12 " />
+                  <CarouselNext className="right-3 z-10 w-12 h-12 " />
+
+                  <CarouselContent className="w-full ml-0 gap-4">
+                    {topSellers
+                      .sort((a, b) => a.product.type.localeCompare(b.product.type))
+                      .map((el, index) => (
+                        <CarouselItem
+                          key={index}
+                          className="basis-1/2 sm:basis-1/3 lg:basis-1/4 self-stretch flex pl-0"
+                        >
+                          <ProductItem key={el.id} {...el} />
+                          {/* <div className="p-1">
+              <Card>
+                <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <span className="text-3xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </div> */}
+                        </CarouselItem>
+                      ))}
+                  </CarouselContent>
+                </Carousel>
               </div>
             </div>
-          ) : null}
+          ) : // </div>
+          null}
         </div>
 
         <div className="w-full flex flex-col gap-6 py-10">
