@@ -41,7 +41,11 @@ const page = (props: Props) => {
             ) : (
               <div>
                 {productTypes.map((productType) => {
-                  const filteredArr = products.filter((item) => item.product.type === productType);
+                  const filteredArr = products
+                    .filter((item) => item.product.type === productType)
+                    .sort((a, b) => {
+                      return a.product.status === b.product.status ? 0 : a.product.status ? -1 : 1;
+                    });
                   return (
                     <div className="">
                       <div className="py-10 capitalize text-lg font-medium">

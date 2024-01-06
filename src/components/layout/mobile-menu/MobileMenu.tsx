@@ -41,7 +41,7 @@ const MobileMenu: FC<Props> = () => {
       // }}
       // animate={hidden ? "hidden" : "visible"}
       // transition={{ duration: 0.35 }}
-      className="fixed   bottom-0 left-1/2 -translate-x-1/2 max-w-sm w-full bg-background  md:hidden rounded-xl h-14 text-foreground flex items-end px-2 justify-around py-1 z-40"
+      className="fixed bottom-4 left-1/2 -translate-x-1/2 max-w-sm w-[99%] font-medium bg-indigo-300 md:hidden rounded-xl h-14 text-foreground flex items-end px-2 justify-around py-1 z-40"
     >
       <CatalogModal />
       <CartModal />

@@ -31,7 +31,11 @@ export default function Home() {
         <div className="w-full">
           {topSellers && topSellers.length > 0
             ? topSellersTypes.map((item) => {
-                const arr = topSellers.filter((el) => el.product.type === item);
+                const arr = topSellers
+                  .filter((el) => el.product.type === item)
+                  .sort((a, b) => {
+                    return a.product.status === b.product.status ? 0 : a.product.status ? -1 : 1;
+                  });
                 return (
                   <div className="mb-10">
                     <div className="flex flex-col w-full gap-5">

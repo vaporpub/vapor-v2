@@ -17,7 +17,11 @@ const page = (props: Props) => {
       <div>
         <div className="grid xs:mx-0 mx-auto grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 xs:gap-4 w-full">
           {!isEmpty ? (
-            products.map((el) => <ProductItem key={el.id} {...el} />)
+            products
+              .sort((a, b) => {
+                return a.product.status === b.product.status ? 0 : a.product.status ? -1 : 1;
+              })
+              .map((el) => <ProductItem key={el.id} {...el} />)
           ) : (
             <div>Нет товаров</div>
           )}
