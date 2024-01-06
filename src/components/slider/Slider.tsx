@@ -92,7 +92,7 @@ export const Slider = () => {
             muted
             autoPlay
             loop
-            src={images[imageIndex].url}
+            playsInline
             transition={{
               x: { type: "linear", stiffness: 300, damping: 30 },
               opacity: { duration: 0.2 },
@@ -110,7 +110,9 @@ export const Slider = () => {
               }
             }}
             className="absolute w-full h-full  rounded-xl"
-          />
+          >
+            <source type="video/mp4" src={images[imageIndex].url} />
+          </motion.video>
         )}
       </AnimatePresence>
       <button
