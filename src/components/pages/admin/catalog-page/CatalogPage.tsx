@@ -40,6 +40,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useCatalog } from "@/context/CatalogContext";
 interface Props {}
 const formSchema = z.object({
   title: z.string().default("Без названия"),
@@ -67,7 +68,8 @@ export const CatalogPage: FC<Props> = () => {
   const { add } = useCreateProduct();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  const { products, isEmpty } = useGetAllProducts();
+  const { products, isEmpty, productTypes } = useGetAllProducts();
+  // const {} = useCatalog
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -92,7 +94,7 @@ export const CatalogPage: FC<Props> = () => {
         img: fileToLoad,
       };
       const product = await add(payload);
-      console.log("product here", product);
+      // console.log("product here", product);
       if (closeButtonRef && closeButtonRef.current) closeButtonRef.current.click();
       form.reset();
     } catch (error) {}
@@ -238,6 +240,8 @@ export const CatalogPage: FC<Props> = () => {
                             <SelectItem value="vozol-gear">Vozol Gear</SelectItem>
                             <SelectItem value="vozol-star">Vozol Star</SelectItem>
                             <SelectItem value="elfbar-ebdesign">Elfbar EBdesing</SelectItem>
+                            <SelectItem value="crazy-ace">CrazyAce</SelectItem>
+                            <SelectItem value="mystery">Mystery</SelectItem>
                           </SelectGroup>
                         </SelectContent>
                       </Select>
@@ -386,15 +390,32 @@ export const CatalogPage: FC<Props> = () => {
           </DialogContent>
         </Dialog>
       </div>
-      <div>
+      <div className="pb-5">
         {isEmpty ? (
           <div> Нет товаров</div>
         ) : (
-          <div className="grid xs:mx-0 mx-auto grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 xs:gap-4 py-10">
-            {products.map((el) => (
-              // <div key={el.id}>{el.title}</div>
-              <Product key={el.id} {...el} />
-            ))}
+          // <div className="grid xs:mx-0 mx-auto grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 xs:gap-4 py-10">
+          //   {products.map((el) => (
+          //     // <div key={el.id}>{el.title}</div>
+          //     <Product key={el.id} {...el} />
+          //   ))}
+          // </div>
+          <div>
+            {productTypes.map((productType) => {
+              const filteredArr = products.filter((item) => item.product.type === productType);
+              return (
+                <div className="">
+                  <div className="py-10 capitalize text-lg font-medium">
+                    {productType.split("-").join(" ")}
+                  </div>
+                  <div className="grid xs:mx-0 mx-auto grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 xs:gap-4 w-full">
+                    {filteredArr.map((el) => (
+                      <Product key={el.id} {...el} />
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         )}
       </div>

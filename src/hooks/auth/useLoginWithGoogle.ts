@@ -32,7 +32,7 @@ export const useLoginWithGoogle = () => {
         //   userName: displayName!,
         //   uid
         // };
-        const userDoc = userSchema.parse({
+        const userDoc = userSchema.safeParse({
           uid,
           email,
           emailVerified,

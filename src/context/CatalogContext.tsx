@@ -16,7 +16,7 @@ const CatalogContext = createContext({} as CatalogContextT);
 export function useCatalog() {
   return useContext(CatalogContext);
 }
-type TypeProduct = "vozol-star" | "vozol-gear" | "elfbar-ebdesign";
+type TypeProduct = "vozol-star" | "vozol-gear" | "elfbar-ebdesign" | "crazy-ace" | "mystery";
 
 export const CatalogContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const { isEmpty, products } = useGetAllProducts();

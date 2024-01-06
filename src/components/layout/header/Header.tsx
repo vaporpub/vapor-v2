@@ -18,6 +18,7 @@ import {
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { Popover, PopoverContent, PopoverTrigger, PopoverClose } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 interface Props {}
@@ -57,7 +58,7 @@ export const Header: FC<Props> = () => {
               Каталог
             </Link>
           </Button> */}
-          <NavigationMenu>
+          {/* <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger
@@ -68,25 +69,103 @@ export const Header: FC<Props> = () => {
                 >
                   Каталог
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="">
-                  <div className="flex flex-col max-w-xs w-full">
-                    <NavigationMenuLink className="py-2 w-32 text-center hover:bg-accent" asChild>
-                      <Link href="/catalog">Все</Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink className="py-2 w-32 text-center hover:bg-accent" asChild>
-                      <Link href="/catalog/vozol-gear">Vozol Gear</Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink className="py-2 w-32 text-center hover:bg-accent" asChild>
-                      <Link href="/catalog/vozol-star">Vozol Star</Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink className="py-2 w-32 text-center hover:bg-accent" asChild>
-                      <Link href="/catalog/elfbar-ebdesign">Elfbar EBdesing</Link>
-                    </NavigationMenuLink>
-                  </div>
+                <NavigationMenuContent className="w-52">
+                  <NavigationMenuLink className="py-2 text-center hover:bg-accent" asChild>
+                    <Link href="/catalog">Все</Link>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink
+                    className="py-2 text-center hover:bg-accent grid grid-cols-2 whitespace-nowrap gap-2"
+                    asChild
+                  >
+                    <Link href="/catalog/vozol-gear">
+                      <span>Vozol Gear</span>
+                      <span className="">10000</span>
+                    </Link>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink
+                    className="py-2 text-center hover:bg-accent grid grid-cols-2 whitespace-nowrap gap-2"
+                    asChild
+                  >
+                    <Link href="/catalog/vozol-star">
+                      <span>Vozol Star</span>
+                      <span>6000</span>
+                    </Link>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink
+                    className="py-2 text-center hover:bg-accent grid grid-cols-2 whitespace-nowrap gap-2"
+                    asChild
+                  >
+                    <Link href="/catalog/elfbar-ebdesign">
+                      <span>Elfbar EBdesing</span>
+                      <span>5000</span>
+                    </Link>
+                  </NavigationMenuLink>
                 </NavigationMenuContent>
               </NavigationMenuItem>
             </NavigationMenuList>
-          </NavigationMenu>
+          </NavigationMenu> */}
+          <Popover>
+            <PopoverTrigger
+              className={cn("bg-transparent !text-foreground", buttonVariants({ variant: "link" }))}
+            >
+              Каталог
+            </PopoverTrigger>
+            <PopoverContent className="flex flex-col p-0 w-fit">
+              <PopoverClose asChild>
+                <Link
+                  className="w-full py-2 px-3 hover:bg-secondary transition-colors"
+                  href={"/catalog"}
+                >
+                  Все
+                </Link>
+              </PopoverClose>
+              <PopoverClose asChild>
+                <Link
+                  className="w-full py-2 px-3 hover:bg-secondary transition-colors grid grid-cols-2"
+                  href="/catalog/vozol-gear"
+                >
+                  <span>Vozol Gear</span>
+                  <span className="text-center">10000</span>
+                </Link>
+              </PopoverClose>
+              <PopoverClose asChild>
+                <Link
+                  className="w-full py-2 px-3 hover:bg-secondary transition-colors grid grid-cols-2"
+                  href="/catalog/vozol-star"
+                >
+                  <span>Vozol Star</span>
+                  <span className="text-center">6000</span>
+                </Link>
+              </PopoverClose>
+              <PopoverClose asChild>
+                <Link
+                  className="w-full py-2 px-3 hover:bg-secondary transition-colors grid grid-cols-2"
+                  href="/catalog/elfbar-ebdesign"
+                >
+                  <span>Elfbar EBdesing</span>
+                  <span className="text-center">5000</span>
+                </Link>
+              </PopoverClose>
+              <PopoverClose asChild>
+                <Link
+                  className="w-full py-2 px-3 hover:bg-secondary transition-colors grid grid-cols-2"
+                  href="/catalog/crazy-ace"
+                >
+                  <span>CrazyAce</span>
+                  <span className="text-center">15000</span>
+                </Link>
+              </PopoverClose>
+              <PopoverClose asChild>
+                <Link
+                  className="w-full py-2 px-3 hover:bg-secondary transition-colors grid grid-cols-2"
+                  href="/catalog/mystery"
+                >
+                  <span>Mystery</span>
+                  <span className="text-center">???</span>
+                </Link>
+              </PopoverClose>
+            </PopoverContent>
+          </Popover>
           <Button className="text-foreground" variant={"link"} asChild>
             <Link className="" href={"/garantiya"}>
               Гарантия

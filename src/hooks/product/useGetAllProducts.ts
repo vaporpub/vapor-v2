@@ -1,7 +1,7 @@
 import { db } from "@/lib/firebase.config";
 import { TOrderType, TProduct, productSchema } from "@/lib/schema";
 import { collection, doc, onSnapshot, orderBy, query } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export type ProductRef = {
   product: TProduct;
@@ -35,5 +35,13 @@ export const useGetAllProducts = () => {
     };
   }, []);
 
-  return { products, isEmpty };
+  const productTypes = useMemo(() => {
+    const types: string[] = [];
+    products.forEach((item) => {
+      if (!types.includes(item.product.type)) types.push(item.product.type);
+    });
+    return types;
+  }, [products]);
+
+  return { products, isEmpty, productTypes };
 };
