@@ -54,31 +54,37 @@ export const CatalogModal: FC<Props> = () => {
           <DrawerClose asChild>
             <Link className="px-4 w-full py-3 grid grid-cols-2" href={"/catalog/vozol-gear"}>
               <span>Vozol Gear</span>
-              <span className="text-center">10000</span>
+              <span className="text-center">10000k</span>
             </Link>
           </DrawerClose>
           <DrawerClose asChild>
             <Link className="px-4 w-full py-3 grid grid-cols-2" href={"/catalog/vozol-star"}>
               <span>Vozol Star</span>
-              <span className="text-center">6000</span>
+              <span className="text-center">9000k</span>
             </Link>
           </DrawerClose>
           <DrawerClose asChild>
             <Link className="px-4 w-full py-3 grid grid-cols-2" href={"/catalog/elfbar-ebdesign"}>
               <span>Elfbar EBdesing</span>
-              <span className="text-center">5000</span>
+              <span className="text-center">6000k</span>
             </Link>
           </DrawerClose>
           <DrawerClose asChild>
             <Link className="px-4 w-full py-3 grid grid-cols-2" href={"/catalog/crazy-ace"}>
               <span>CrazyAce</span>
-              <span className="text-center">15000</span>
+              <span className="text-center">15000k</span>
+            </Link>
+          </DrawerClose>
+          <DrawerClose asChild>
+            <Link className="px-4 w-full py-3 grid grid-cols-2" href={"/catalog/geek-bar"}>
+              <span>Geek Bar</span>
+              <span className="text-center">15000k</span>
             </Link>
           </DrawerClose>
           <DrawerClose asChild>
             <Link className="px-4 w-full py-3 grid grid-cols-2" href={"/catalog/mystery"}>
-              <span>Mystery</span>
-              <span className="text-center">???</span>
+              <span>Mystery Box</span>
+              <span className="text-center">3k-8k</span>
             </Link>
           </DrawerClose>
         </div>

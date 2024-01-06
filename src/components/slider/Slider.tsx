@@ -54,32 +54,64 @@ export const Slider = () => {
   return (
     <div className="relative w-full flex items-center aspect-video rounded-xl overflow-hidden">
       <AnimatePresence initial={false} custom={direction}>
-        <motion.img
-          key={page}
-          custom={direction}
-          variants={variants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          src={images[imageIndex]}
-          transition={{
-            x: { type: "linear", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 },
-          }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
-          onDragEnd={(e, { offset, velocity }) => {
-            const swipe = swipePower(offset.x, velocity.x);
+        {images[imageIndex].type === "image" ? (
+          <motion.img
+            key={page}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            src={images[imageIndex].url}
+            transition={{
+              x: { type: "linear", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = swipePower(offset.x, velocity.x);
 
-            if (swipe < -swipeConfidenceThreshold) {
-              paginate(1);
-            } else if (swipe > swipeConfidenceThreshold) {
-              paginate(-1);
-            }
-          }}
-          className="absolute w-full h-full  rounded-xl"
-        />
+              if (swipe < -swipeConfidenceThreshold) {
+                paginate(1);
+              } else if (swipe > swipeConfidenceThreshold) {
+                paginate(-1);
+              }
+            }}
+            className="absolute w-full h-full  rounded-xl"
+          />
+        ) : (
+          <motion.video
+            key={page}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            muted
+            autoPlay
+            loop
+            src={images[imageIndex].url}
+            transition={{
+              x: { type: "linear", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = swipePower(offset.x, velocity.x);
+
+              if (swipe < -swipeConfidenceThreshold) {
+                paginate(1);
+              } else if (swipe > swipeConfidenceThreshold) {
+                paginate(-1);
+              }
+            }}
+            className="absolute w-full h-full  rounded-xl"
+          />
+        )}
       </AnimatePresence>
       <button
         onClick={() => paginate(-1)}

@@ -125,7 +125,7 @@ export const Header: FC<Props> = () => {
                   href="/catalog/vozol-gear"
                 >
                   <span>Vozol Gear</span>
-                  <span className="text-center">10000</span>
+                  <span className="text-center">10000k</span>
                 </Link>
               </PopoverClose>
               <PopoverClose asChild>
@@ -134,7 +134,7 @@ export const Header: FC<Props> = () => {
                   href="/catalog/vozol-star"
                 >
                   <span>Vozol Star</span>
-                  <span className="text-center">6000</span>
+                  <span className="text-center">9000k</span>
                 </Link>
               </PopoverClose>
               <PopoverClose asChild>
@@ -143,7 +143,7 @@ export const Header: FC<Props> = () => {
                   href="/catalog/elfbar-ebdesign"
                 >
                   <span>Elfbar EBdesing</span>
-                  <span className="text-center">5000</span>
+                  <span className="text-center">6000k</span>
                 </Link>
               </PopoverClose>
               <PopoverClose asChild>
@@ -152,7 +152,16 @@ export const Header: FC<Props> = () => {
                   href="/catalog/crazy-ace"
                 >
                   <span>CrazyAce</span>
-                  <span className="text-center">15000</span>
+                  <span className="text-center">15000k</span>
+                </Link>
+              </PopoverClose>
+              <PopoverClose asChild>
+                <Link
+                  className="w-full py-2 px-3 hover:bg-secondary transition-colors grid grid-cols-2"
+                  href="/catalog/geek-bar"
+                >
+                  <span>Geek Bar</span>
+                  <span className="text-center">15000k</span>
                 </Link>
               </PopoverClose>
               <PopoverClose asChild>
@@ -160,8 +169,8 @@ export const Header: FC<Props> = () => {
                   className="w-full py-2 px-3 hover:bg-secondary transition-colors grid grid-cols-2"
                   href="/catalog/mystery"
                 >
-                  <span>Mystery</span>
-                  <span className="text-center">???</span>
+                  <span>Mystery Box</span>
+                  <span className="text-center">3k-8k</span>
                 </Link>
               </PopoverClose>
             </PopoverContent>

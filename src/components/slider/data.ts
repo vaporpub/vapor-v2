@@ -6,4 +6,17 @@
 //  "/black-friday-sale-612x392.jpg",
 // "/c_02.jpg",
 // "/c_03.jpg"
-export const images = ["/c_01.webp", "/c_02.jpg"];
+export const images = [
+  {
+    url: "b15000_vd_new.mp4",
+    type: "video",
+  },
+  {
+    url: "/c_01.webp",
+    type: "image",
+  },
+  {
+    url: "/c_02.jpg",
+    type: "image",
+  },
+];
