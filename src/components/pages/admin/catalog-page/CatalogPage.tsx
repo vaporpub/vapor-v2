@@ -256,8 +256,11 @@ export const CatalogPage: FC<Props> = () => {
                             <SelectItem value="vozol-star">
                               Vozol Star
                             </SelectItem>
-                            <SelectItem value="elfbar-ebdesign">
+                            {/* <SelectItem value="elfbar-ebdesign">
                               Elfbar EBdesing
+                            </SelectItem> */}
+                            <SelectItem value="funky-lands">
+                              Funky Lands
                             </SelectItem>
                             <SelectItem value="crazy-ace">CrazyAce</SelectItem>
                             <SelectItem value="geek-bar">Geek Bar</SelectItem>

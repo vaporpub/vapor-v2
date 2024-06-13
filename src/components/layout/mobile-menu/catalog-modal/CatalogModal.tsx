@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC } from "react"
 import {
   Dialog,
   DialogContent,
@@ -8,12 +8,12 @@ import {
   DialogTrigger,
   DialogClose,
   DialogOverlay,
-  DialogPortal,
-} from "@/components/ui/dialog";
-import { BiHomeAlt2 } from "react-icons/bi";
-import Image from "next/image";
-import { RiShoppingBagLine, RiCloseLine, RiApps2Line } from "react-icons/ri";
-import Link from "next/link";
+  DialogPortal
+} from "@/components/ui/dialog"
+import { BiHomeAlt2 } from "react-icons/bi"
+import Image from "next/image"
+import { RiShoppingBagLine, RiCloseLine, RiApps2Line } from "react-icons/ri"
+import Link from "next/link"
 
 import {
   Drawer,
@@ -23,9 +23,9 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
+  DrawerTrigger
+} from "@/components/ui/drawer"
+import { Button } from "@/components/ui/button"
 
 interface Props {}
 
@@ -52,37 +52,61 @@ export const CatalogModal: FC<Props> = () => {
             </Link>
           </DrawerClose>
           <DrawerClose asChild>
-            <Link className="px-4 w-full py-3 grid grid-cols-2" href={"/catalog/crazy-ace"}>
+            <Link
+              className="px-4 w-full py-3 grid grid-cols-2"
+              href={"/catalog/crazy-ace"}
+            >
               <span>CrazyAce</span>
               <span className="text-center">15000</span>
             </Link>
           </DrawerClose>
           <DrawerClose asChild>
-            <Link className="px-4 w-full py-3 grid grid-cols-2" href={"/catalog/geek-bar"}>
+            <Link
+              className="px-4 w-full py-3 grid grid-cols-2"
+              href={"/catalog/geek-bar"}
+            >
               <span>Geek Bar</span>
               <span className="text-center">15000</span>
             </Link>
           </DrawerClose>
           <DrawerClose asChild>
-            <Link className="px-4 w-full py-3 grid grid-cols-2" href={"/catalog/vozol-gear"}>
+            <Link
+              className="px-4 w-full py-3 grid grid-cols-2"
+              href={"/catalog/vozol-gear"}
+            >
               <span>Vozol Gear</span>
               <span className="text-center">10000</span>
             </Link>
           </DrawerClose>
           <DrawerClose asChild>
-            <Link className="px-4 w-full py-3 grid grid-cols-2" href={"/catalog/vozol-star"}>
+            <Link
+              className="px-4 w-full py-3 grid grid-cols-2"
+              href={"/catalog/vozol-star"}
+            >
               <span>Vozol Star</span>
               <span className="text-center">9000</span>
             </Link>
           </DrawerClose>
           <DrawerClose asChild>
+            <Link
+              className="px-4 w-full py-3 grid grid-cols-2"
+              href={"/catalog/funky-lands"}
+            >
+              <span>Funky Lands</span>
+              <span className="text-center">7000</span>
+            </Link>
+          </DrawerClose>
+          {/* <DrawerClose asChild>
             <Link className="px-4 w-full py-3 grid grid-cols-2" href={"/catalog/elfbar-ebdesign"}>
               <span>Elfbar EBdesing</span>
               <span className="text-center">6000</span>
             </Link>
-          </DrawerClose>
+          </DrawerClose> */}
           <DrawerClose asChild>
-            <Link className="px-4 w-full py-3 grid grid-cols-2" href={"/catalog/mystery"}>
+            <Link
+              className="px-4 w-full py-3 grid grid-cols-2"
+              href={"/catalog/mystery"}
+            >
               <span>Mystery Box</span>
               <span className="text-center">3k-8k</span>
             </Link>
@@ -96,8 +120,8 @@ export const CatalogModal: FC<Props> = () => {
         </DrawerFooter> */}
       </DrawerContent>
     </Drawer>
-  );
-};
+  )
+}
 
 // export const CatalogModal: FC<Props> = () => {
 //   return (

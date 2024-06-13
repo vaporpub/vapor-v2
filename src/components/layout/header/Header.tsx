@@ -1,11 +1,11 @@
-"use client";
-import Link from "next/link";
-import { FC } from "react";
-import { RiShoppingBagLine } from "react-icons/ri";
+"use client"
+import Link from "next/link"
+import { FC } from "react"
+import { RiShoppingBagLine } from "react-icons/ri"
 // import { Menu } from "./menu/Menu";
-import dynamic from "next/dynamic";
-import { useMediaQuery } from "react-responsive";
-import { Button, buttonVariants } from "@/components/ui/button";
+import dynamic from "next/dynamic"
+import { useMediaQuery } from "react-responsive"
+import { Button, buttonVariants } from "@/components/ui/button"
 // import { MobileMenu } from "./menu/MobileMenu";
 import {
   NavigationMenu,
@@ -16,22 +16,27 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   NavigationMenuViewport,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import { Popover, PopoverContent, PopoverTrigger, PopoverClose } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
+  navigationMenuTriggerStyle
+} from "@/components/ui/navigation-menu"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  PopoverClose
+} from "@/components/ui/popover"
+import { cn } from "@/lib/utils"
+import Image from "next/image"
 interface Props {}
 const MobileMenu = dynamic(() => import("./menu/mobile-menu/MobileMenu"), {
   ssr: false, // Отключаем SSR для динамической загрузки
-  loading: () => <div></div>,
-});
+  loading: () => <div></div>
+})
 const DesktopMenu = dynamic(() => import("./menu/desktop-menu/DesktopMenu"), {
   ssr: false, // Отключаем SSR для динамической загрузки
-  loading: () => <div></div>,
-});
+  loading: () => <div></div>
+})
 export const Header: FC<Props> = () => {
-  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isMobile = useMediaQuery({ maxWidth: 767 })
 
   return (
     <div className="border-b border-border py-3 sticky top-0 bg-secondary z-50 w-full h-fit px-2">
@@ -106,7 +111,10 @@ export const Header: FC<Props> = () => {
           </NavigationMenu> */}
           <Popover>
             <PopoverTrigger
-              className={cn("bg-transparent !text-foreground", buttonVariants({ variant: "link" }))}
+              className={cn(
+                "bg-transparent !text-foreground",
+                buttonVariants({ variant: "link" })
+              )}
             >
               Каталог
             </PopoverTrigger>
@@ -158,12 +166,21 @@ export const Header: FC<Props> = () => {
               <PopoverClose asChild>
                 <Link
                   className="w-full py-2 px-3 hover:bg-secondary transition-colors grid grid-cols-2"
+                  href="/catalog/funky-lands"
+                >
+                  <span>Funky Lands</span>
+                  <span className="text-center">7000</span>
+                </Link>
+              </PopoverClose>
+              {/* <PopoverClose asChild>
+                <Link
+                  className="w-full py-2 px-3 hover:bg-secondary transition-colors grid grid-cols-2"
                   href="/catalog/elfbar-ebdesign"
                 >
                   <span>Elfbar EBdesing</span>
                   <span className="text-center">6000</span>
                 </Link>
-              </PopoverClose>
+              </PopoverClose> */}
 
               <PopoverClose asChild>
                 <Link
@@ -203,5 +220,5 @@ export const Header: FC<Props> = () => {
         {isMobile ? <MobileMenu /> : <DesktopMenu />}
       </div>
     </div>
-  );
-};
+  )
+}
