@@ -1,28 +1,29 @@
-import { auth, db } from "@/lib/firebase.config";
+import { auth, db } from "@/lib/firebase.config"
 import {
   GoogleAuthProvider,
   UserCredential,
   signInWithEmailAndPassword,
-  signInWithPopup,
-} from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+  signInWithPopup
+} from "firebase/auth"
+import { doc, getDoc, setDoc } from "firebase/firestore"
 // import { TUser } from "./auth.interface";
-import { setDocument } from "../firebase.utils";
-import { FirebaseError } from "firebase/app";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
-import { userSchema } from "@/lib/schema";
+import { setDocument } from "../firebase.utils"
+import { FirebaseError } from "firebase/app"
+import toast from "react-hot-toast"
+import { useRouter } from "next/navigation"
+import { userSchema } from "@/lib/schema"
 
 export const useLoginWithGoogle = () => {
-  const provider = new GoogleAuthProvider();
-  const { push } = useRouter();
+  const provider = new GoogleAuthProvider()
+  const { push } = useRouter()
   const loginWithGoogle = async () => {
     try {
-      const result: UserCredential = await signInWithPopup(auth, provider);
-      if (!result) return null;
-      const { email, uid, phoneNumber, displayName, emailVerified } = result.user;
-      const docRef = doc(db, "users", uid);
-      const docSnap = await getDoc(docRef);
+      const result: UserCredential = await signInWithPopup(auth, provider)
+      if (!result) return null
+      const { email, uid, phoneNumber, displayName, emailVerified } =
+        result.user
+      const docRef = doc(db, "users", uid)
+      const docSnap = await getDoc(docRef)
       if (!docSnap.exists()) {
         // const userDoc: TUser = {
         //   email: email!,
@@ -32,25 +33,33 @@ export const useLoginWithGoogle = () => {
         //   userName: displayName!,
         //   uid
         // };
-        const userDoc = userSchema.safeParse({
+        // const userDoc = userSchema.safeParse({
+        // uid,
+        // email,
+        // emailVerified,
+        // phoneNumber,
+        // userName: displayName,
+        // });
+        const userDoc = {
           uid,
           email,
           emailVerified,
           phoneNumber,
           userName: displayName,
-        });
-        await setDocument("users", uid, userDoc);
+          role: "user"
+        }
+        await setDocument("users", uid, userDoc)
       }
-      push("/profile");
+      push("/profile")
     } catch (error) {
       if (error instanceof FirebaseError) {
-        console.log(error.code);
+        console.log(error.code)
       }
     }
-  };
+  }
   return {
-    loginWithGoogle,
-  };
+    loginWithGoogle
+  }
   // signInWithPopup(auth, provider).then(async (result) => {
 
   //   const { email, uid, phoneNumber, displayName, emailVerified } = result.user;
@@ -73,4 +82,4 @@ export const useLoginWithGoogle = () => {
   //   //     userName: displayName,
   //   //   });
   // });
-};
+}

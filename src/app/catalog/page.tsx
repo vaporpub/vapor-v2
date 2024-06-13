@@ -1,21 +1,21 @@
-"use client";
-import { Filter } from "@/components/pages/catalog/filter/Filter";
-import { ProductItem } from "@/components/product/ProductItem";
-import { Input } from "@/components/ui/input";
-import { useCatalog } from "@/context/CatalogContext";
-import { useGetAllProducts } from "@/hooks/product/useGetAllProducts";
-import Image from "next/image";
-import React from "react";
-import { CgOptions } from "react-icons/cg";
-import { RiShoppingBagLine } from "react-icons/ri";
+"use client"
+import { Filter } from "@/components/pages/catalog/filter/Filter"
+import { ProductItem } from "@/components/product/ProductItem"
+import { Input } from "@/components/ui/input"
+import { useCatalog } from "@/context/CatalogContext"
+import { useGetAllProducts } from "@/hooks/product/useGetAllProducts"
+import Image from "next/image"
+import React from "react"
+import { CgOptions } from "react-icons/cg"
+import { RiShoppingBagLine } from "react-icons/ri"
 
-const im = "";
+const im = ""
 interface Props {}
 
 const page = (props: Props) => {
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
   // const { isEmpty, products } = useGetAllProducts();
-  const { products, isEmpty, productTypes } = useCatalog();
+  const { products, isEmpty, productTypes } = useCatalog()
   return (
     <div>
       <div className="max-w-6xl w-full mx-auto pb-10 px-2">
@@ -40,14 +40,18 @@ const page = (props: Props) => {
               <div>Нет товаров</div>
             ) : (
               <div>
-                {productTypes.map((productType) => {
+                {productTypes.map((productType, index) => {
                   const filteredArr = products
                     .filter((item) => item.product.type === productType)
                     .sort((a, b) => {
-                      return a.product.status === b.product.status ? 0 : a.product.status ? -1 : 1;
-                    });
+                      return a.product.status === b.product.status
+                        ? 0
+                        : a.product.status
+                        ? -1
+                        : 1
+                    })
                   return (
-                    <div className="">
+                    <div key={index} className="">
                       <div className="py-10 capitalize text-lg font-medium">
                         {productType.split("-").join(" ")}
                       </div>
@@ -57,7 +61,7 @@ const page = (props: Props) => {
                         ))}
                       </div>
                     </div>
-                  );
+                  )
                 })}
               </div>
             )}
@@ -73,7 +77,7 @@ const page = (props: Props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default page;
+export default page

@@ -1,7 +1,7 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { FC, useRef, useState } from "react";
-import { X } from "lucide-react";
+"use client"
+import { Button } from "@/components/ui/button"
+import { FC, useRef, useState } from "react"
+import { X } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -10,8 +10,8 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogClose,
-  DialogFooter,
-} from "@/components/ui/dialog";
+  DialogFooter
+} from "@/components/ui/dialog"
 import {
   Form,
   FormControl,
@@ -19,18 +19,18 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useCreateProduct } from "@/hooks/product/useCreateProduct";
-import { uploadFile } from "@/hooks/file/utils";
-import { useGetAllProducts } from "@/hooks/product/useGetAllProducts";
-import { Product } from "./product/Product";
-import { v4 } from "uuid";
+  FormMessage
+} from "@/components/ui/form"
+import { Textarea } from "@/components/ui/textarea"
+import { Input } from "@/components/ui/input"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useCreateProduct } from "@/hooks/product/useCreateProduct"
+import { uploadFile } from "@/hooks/file/utils"
+import { useGetAllProducts } from "@/hooks/product/useGetAllProducts"
+import { Product } from "./product/Product"
+import { v4 } from "uuid"
 import {
   Select,
   SelectContent,
@@ -38,9 +38,9 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useCatalog } from "@/context/CatalogContext";
+  SelectValue
+} from "@/components/ui/select"
+import { useCatalog } from "@/context/CatalogContext"
 interface Props {}
 const formSchema = z.object({
   title: z.string().default("Без названия"),
@@ -52,23 +52,23 @@ const formSchema = z.object({
     z.null(),
     z.object({
       url: z.string().default(""),
-      path: z.string().default(""),
-    }),
+      path: z.string().default("")
+    })
   ]),
   //   price: z.number().default(0),
   price: z.coerce.number().min(0).default(0),
   status: z.boolean().default(false),
   type: z.string(),
   topSeller: z.boolean().default(false),
-  newProduct: z.boolean().default(false),
-});
+  newProduct: z.boolean().default(false)
+})
 
 export const CatalogPage: FC<Props> = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const { add } = useCreateProduct();
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const [file, setFile] = useState<File | null>(null)
+  const { add } = useCreateProduct()
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
 
-  const { products, isEmpty, productTypes } = useGetAllProducts();
+  const { products, isEmpty, productTypes } = useGetAllProducts()
   // const {} = useCatalog
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -79,33 +79,34 @@ export const CatalogPage: FC<Props> = () => {
       img: null,
       price: 0,
       status: false,
-      title: "",
-    },
-  });
+      title: ""
+    }
+  })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    console.log(values)
     try {
-      const fileToLoad = await loadFile();
+      const fileToLoad = await loadFile()
       const payload = {
         ...values,
-        img: fileToLoad,
-      };
-      const product = await add(payload);
+        img: fileToLoad
+      }
+      const product = await add(payload)
       // console.log("product here", product);
-      if (closeButtonRef && closeButtonRef.current) closeButtonRef.current.click();
-      form.reset();
+      if (closeButtonRef && closeButtonRef.current)
+        closeButtonRef.current.click()
+      form.reset()
     } catch (error) {}
     // const { confirmPassword, ...payload } = values;
     // register(payload);
   }
   const loadFile = async () => {
     if (file) {
-      return await uploadFile("images/" + v4(), file);
-    } else return null;
-  };
+      return await uploadFile("images/" + v4(), file)
+    } else return null
+  }
 
   return (
     <div className="max-w-6xl w-full mx-auto px-2">
@@ -124,7 +125,10 @@ export const CatalogPage: FC<Props> = () => {
               <DialogTitle>Создать новый продукт</DialogTitle>
             </DialogHeader>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-5"
+              >
                 <FormField
                   control={form.control}
                   name="title"
@@ -149,7 +153,9 @@ export const CatalogPage: FC<Props> = () => {
                     </label>
                     <input
                       accept="image/*"
-                      onChange={({ target }) => setFile(target.files && target.files[0])}
+                      onChange={({ target }) =>
+                        setFile(target.files && target.files[0])
+                      }
                       id="example1"
                       className="cursor-pointer file:cursor-pointer block w-full text-sm file:mr-4 file:rounded-md file:bg-primary file:border-0 file:py-2.5 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-primary/80 focus:outline-none disabled:pointer-events-none disabled:opacity-60"
                       type="file"
@@ -214,7 +220,11 @@ export const CatalogPage: FC<Props> = () => {
                     <FormItem>
                       <FormLabel>Цена при скидке</FormLabel>
                       <FormControl>
-                        <Input type="number" placeholder="Введите цену" {...field} />
+                        <Input
+                          type="number"
+                          placeholder="Введите цену"
+                          {...field}
+                        />
                       </FormControl>
                       {/* <FormDescription>This is your public display name.</FormDescription> */}
                       <FormMessage />
@@ -228,7 +238,10 @@ export const CatalogPage: FC<Props> = () => {
                     <FormItem>
                       <FormLabel>Тип товара</FormLabel>
 
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <FormControl>
                           <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="Выберите тип товара" />
@@ -237,9 +250,15 @@ export const CatalogPage: FC<Props> = () => {
                         <SelectContent>
                           <SelectGroup>
                             <SelectLabel>Тип</SelectLabel>
-                            <SelectItem value="vozol-gear">Vozol Gear</SelectItem>
-                            <SelectItem value="vozol-star">Vozol Star</SelectItem>
-                            <SelectItem value="elfbar-ebdesign">Elfbar EBdesing</SelectItem>
+                            <SelectItem value="vozol-gear">
+                              Vozol Gear
+                            </SelectItem>
+                            <SelectItem value="vozol-star">
+                              Vozol Star
+                            </SelectItem>
+                            <SelectItem value="elfbar-ebdesign">
+                              Elfbar EBdesing
+                            </SelectItem>
                             <SelectItem value="crazy-ace">CrazyAce</SelectItem>
                             <SelectItem value="geek-bar">Geek Bar</SelectItem>
                             <SelectItem value="mystery">Mystery</SelectItem>
@@ -402,14 +421,18 @@ export const CatalogPage: FC<Props> = () => {
           //   ))}
           // </div>
           <div>
-            {productTypes.map((productType) => {
+            {productTypes.map((productType, index) => {
               const filteredArr = products
                 .filter((item) => item.product.type === productType)
                 .sort((a, b) => {
-                  return a.product.status === b.product.status ? 0 : a.product.status ? -1 : 1;
-                });
+                  return a.product.status === b.product.status
+                    ? 0
+                    : a.product.status
+                    ? -1
+                    : 1
+                })
               return (
-                <div className="">
+                <div key={index} className="">
                   <div className="py-10 capitalize text-lg font-medium">
                     {productType.split("-").join(" ")}
                   </div>
@@ -419,11 +442,11 @@ export const CatalogPage: FC<Props> = () => {
                     ))}
                   </div>
                 </div>
-              );
+              )
             })}
           </div>
         )}
       </div>
     </div>
-  );
-};
+  )
+}

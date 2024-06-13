@@ -1,20 +1,21 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import React from "react";
-import {} from "firebase/auth";
-import { LogoutButton } from "@/components/pages/profile/LogoutButton";
-import { AdminHeader } from "@/components/pages/profile/AdminHeader";
-import { useLastOrder } from "@/hooks/order/userLastOrder";
-import { numberToEUR } from "@/lib/utils";
-import { useAuth } from "@/context/Authorization";
-import { GoLinkExternal } from "react-icons/go";
+"use client"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import React from "react"
+import {} from "firebase/auth"
+import { LogoutButton } from "@/components/pages/profile/LogoutButton"
+import { AdminHeader } from "@/components/pages/profile/AdminHeader"
+import { useLastOrder } from "@/hooks/order/userLastOrder"
+import { numberToEUR } from "@/lib/utils"
+import { useAuth } from "@/context/Authorization"
+import { GoLinkExternal } from "react-icons/go"
 
 interface Props {}
 
 const page = (props: Props) => {
-  const { user } = useAuth();
-  const { order } = useLastOrder(user && user.uid);
+  const { user } = useAuth()
+  const { order } = useLastOrder(user && user.uid)
+  // console.log(user)
   return (
     <div className="flex flex-col flex-1">
       <div className="max-w-6xl w-full mx-auto px-2 flex flex-col flex-1">
@@ -119,7 +120,7 @@ const page = (props: Props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default page;
+export default page
